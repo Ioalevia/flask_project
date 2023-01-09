@@ -11,7 +11,7 @@ app: Flask = Flask(__name__)
 
 
 # __CONFIG__
-app.config["SECRET_KEY"] = "^8wg6yjji4@2ur^41jq6g9hw%4q(77&jgc#zmzlh%v_959lf6)"
+app.config["SECRET_KEY"] = "v0w_hu@=c65diol%(kp%h6ii&d4(3-vp38f8)2^6jd&qm&@%*+"
 
 
 # __DB__
