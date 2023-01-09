@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ url_for('user.user_list')}}">Users</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('users_app.list')}}">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('article.article_list')}}">Articles</a>
+                    <a class="nav-link" href="{{ url_for('article_app.list')}}">Articles</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -19,12 +19,14 @@
                         Administration
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Log in</a></li>
+
+                        {% if current_user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{{ url_for('auth_app.logout') }}">Log out</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{{ url_for('auth_app.login') }}">Log in</a></li>
                         <li><a class="dropdown-item" href="#">Sign in</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Log out</a></li>
+                        {% endif %}
+
                     </ul>
                 </li>
                 <li class="nav-item">
