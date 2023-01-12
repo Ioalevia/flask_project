@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}
+  Login as
+{% endblock title %}
+{% block content %}
+  <h1>Login as user:</h1>
+  {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
+  <form class="row g-3" method="post">
+  <div class="col-auto">
+    <label for="input-email" class="visually-hidden">Email</label>
+    <input type="text" class="form-control" id="input-email" name="email" placeholder="email" required>
+  </div>
+  <div class="col-auto">
+    <label for="input-password" class="visually-hidden">Password</label>
+    <input id="input-password" class="form-control" type="text" name="password" placeholder="password">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary mb-3">Login</button>
+  </form>
+{% endblock content %}
+{% block footer %}
+{% endblock footer %}
