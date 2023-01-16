@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template
 from werkzeug.exceptions import BadRequest
 
@@ -6,22 +7,24 @@ from blog.models import db, UserModel
 from blog.views.user import users_app
 from blog.views.article import article_app
 from blog.views.auth import auth_app, login_manager
+from flask_migrate import Migrate
 
 app: Flask = Flask(__name__)
 
 
-# __CONFIG__
-app.config["SECRET_KEY"] = "v0w_hu@=c65diol%(kp%h6ii&d4(3-vp38f8)2^6jd&qm&@%*+"
 
-
-# __DB__
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///blog.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+# app.config["SECRET_KEY"] = "v0w_hu@=c65diol%(kp%h6ii&d4(3-vp38f8)2^6jd&qm&@%*+"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///blog.db"
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+cfg_name = "DevConfig"
+app.config.from_object(f"blog.config.{cfg_name}")
 
 # __INIT__
 db.init_app(app)
 login_manager.init_app(app)
+
+
+migrate = Migrate(app,db, compare_type=True)
 
 # __CMD__
 @app.cli.command("init-db")

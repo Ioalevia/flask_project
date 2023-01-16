@@ -10,6 +10,9 @@ packages = [{include = "flask_project"}]
 python = "3.11.1"
 flask = "2.2.2"
 flask-sqlalchemy = "3.0.2"
+flask-migrate = "4.0.1"
+psycopg2 = "2.9.5"
+flask-login = "0.6.2"
 
 
 [build-system]
