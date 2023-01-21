@@ -1,9 +1,10 @@
 import os
 from flask import Flask, render_template
 from werkzeug.exceptions import BadRequest
-from blog.models import db, UserModel
+from blog.models import db, UserModel, AuthorModel
 from blog.views.user import users_app
-from blog.views.article import article_app
+from blog.views.article import articles_app
+from blog.views.author import authors_app
 from blog.views.auth import auth_app, login_manager
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
@@ -37,8 +38,9 @@ def create_admin():
 
 
 app.register_blueprint(users_app, url_prefix="/users")
-app.register_blueprint(article_app, url_prefix="/articles")
+app.register_blueprint(articles_app, url_prefix="/articles")
 app.register_blueprint(auth_app, url_prefix="/auth")
+app.register_blueprint(authors_app, url_prefix="/authors")
 
 
 @app.route("/")
