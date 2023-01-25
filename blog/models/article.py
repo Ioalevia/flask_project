@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, ForeignKey, String, Text, DateTime, func
 from sqlalchemy.orm import relationship
 from blog.models import db
 from datetime import datetime
+from blog.models.article_tag import article_tag_association_table
 
 
 class ArticleModel(db.Model):
@@ -12,3 +13,8 @@ class ArticleModel(db.Model):
     body = Column(Text, nullable=False, default="", server_default="")
     dt_created = Column(DateTime, default=datetime.utcnow, server_default=func.now())
     dt_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    tags = relationship(
+        "TagModel",
+        secondary=article_tag_association_table,
+        back_populates="articles",
+    )
