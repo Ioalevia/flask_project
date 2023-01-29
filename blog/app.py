@@ -8,6 +8,7 @@ from blog.views.author import authors_app
 from blog.views.auth import auth_app, login_manager
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
+from blog.admin import admin
 
 
 app: Flask = Flask(__name__)
@@ -25,6 +26,9 @@ migrate = Migrate(app,db, compare_type=True)
 
 
 flask_bcrypt.init_app(app)
+
+
+admin.init_app(app)
 
 
 @app.cli.command("create-admin")

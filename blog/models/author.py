@@ -7,3 +7,6 @@ class AuthorModel(db.Model):
     user_id = Column(Integer, ForeignKey("user_model.id"), nullable=False)
     user = relationship("UserModel", back_populates="author")
     articles = relationship("ArticleModel", back_populates="author")
+
+    def __str__(self):
+        return self.user.username
