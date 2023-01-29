@@ -36,6 +36,25 @@ def create_admin():
     db.session.commit()
     print("created admin:", admin)
 
+@app.cli.command("create-tags")
+def create_tags():
+    """
+    Run in your terminal:
+    ➜ flask create-tags
+    """
+    from blog.models import TagModel
+    for name in [
+        "flask",
+        "django",
+        "python",
+        "sqlalchemy",
+        "news",
+    ]:
+        tag = TagModel(name=name)
+        db.session.add(tag)
+    db.session.commit()
+    print("created tags")
+
 
 app.register_blueprint(users_app, url_prefix="/users")
 app.register_blueprint(articles_app, url_prefix="/articles")
