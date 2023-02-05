@@ -6,6 +6,7 @@
 <h1>Profile</h1>
   <h3>username: {{ user.username }}</h3>
   <h3>email: {{ user.email }}</h3>
+  <h3>articles: {{ count_articles }}</h3>
 {% endblock content %}
 {% block footer %}
   <a href="{{ url_for('users_app.list') }}">Back</a>
