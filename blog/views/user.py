@@ -21,7 +21,7 @@ def users_list():
 @login_required
 def user_detail(user_index: int):
     user = UserModel.query.filter_by(id=user_index).one_or_none()
-    count_articles: Dict = requests.get(f'http://localhost:5000/api/authors/{user_index}/event_get_articles_count/').json()
+    count_articles: Dict = requests.get(f'https://colontino.herokuapp.com/api/authors/{user_index}/event_get_articles_count/').json()
     if user is None:
         raise NotFound(f"User #{user_index} no found.")
     return render_template("user/detail.html", user=user, count_articles=count_articles['count'])
