@@ -33,11 +33,11 @@ def create_article():
     form.tags.choices = [(tag.id, tag.name) for tag in TagModel.query.order_by("name")]
     if request.method == "POST" and form.validate_on_submit():
         article = ArticleModel(title=form.title.data.strip(), body=form.body.data)
-        db.session.add(article)
         if form.tags.data:
             selected_tags = TagModel.query.filter(TagModel.id.in_(form.tags.data))
             for tag in selected_tags:
                 article.tags.append(tag)
+
         if current_user.author:
             # use existing author if present
             article.author = current_user.author
@@ -47,6 +47,7 @@ def create_article():
             db.session.add(author)
             db.session.flush()
             article.author = current_user.author
+        db.session.add(article)
         try:
             db.session.commit()
         except IntegrityError:
